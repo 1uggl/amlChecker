@@ -1,0 +1,23 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+h1 {
+	text-align: center;
+}
+
+div {
+	display: flex;
+	padding: 1em;	
+	width: 80%;
+	border: 1px solid white;
+}
+#transactionID {
+	width: 50%;
+	margin-right: auto;
+}
+
+input {
+	margin: 0 1em;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AML Checker</title>
+    <link href="style.css" rel="stylesheet">
+    <link href="https://media.istockphoto.com/id/1278523396/vector/aml-anti-money-laundering-acronym-business-concept-background.jpg?s=612x612&w=0&k=20&c=evBV-mNZDLKONqSB1H2Pr2J64ul1fw3oiqVJY2NEnbg=" rel="icon" type="image/x-icon">
+  </head>
+  <body>
+    <h1>AML Checker</h1>
+    <div class="input-box">
+      <label for="transactionID">Transaction ID</label>
+      <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
+      <label for="recursion">Backhops</label>
+      <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
+
+      <button id="submit">Prüfen!</button>
+    </div>
+    <p id="error"></p>
+    <h2>Herkunftsadressen</h2>
+    <ol id="list">
+    </ol>
+    <script src="app.js" type="module"></script> 
+  </body>
+</html>
