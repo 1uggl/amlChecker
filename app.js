@@ -6,17 +6,21 @@ let rounds = 0;
 let recursive;
 
 const checkTransaction = async (transID) => {
-  if (rounds < recursive) {
-    rounds++;
-    const response = await getVins(transID);
-    if (response) {
-      for (let vin of response) {
-        adressResultSet.add(vin.prevout["scriptpubkey_address"]);
-        await checkTransaction(vin.txid);
+  try {
+    if (rounds < recursive) {
+      rounds++;
+      const response = await getVins(transID);
+      if (response) {
+        for (let vin of response) {
+          adressResultSet.add(vin.prevout["scriptpubkey_address"]);
+          await checkTransaction(vin.txid);
+        }
       }
+    } else {
+      updateUI();
     }
-  } else {
-    updateUI();
+  } catch (error) {
+    document.getElementById("error").innerText = error;
   }
 }
 
@@ -26,19 +30,26 @@ const updateUI = () => {
   document.getElementById("adressList").innerHTML = ""; 
   document.getElementById("sanctionList").innerHTML = ""; 
   document.getElementById("totalSanctionAdresses").style.color = "";
+
   adressResultSet.forEach(item => {
-    let newAdress = document.createElement("li");
-    newAdress.textContent = item;
+    let newListItem = document.createElement("li");
+    let newLink = document.createElement("a");
+    newLink.href = "https://mempool.space/de/address/" + item;
+    newLink.target = "_blank";
+    newLink.textContent = item;
+    newListItem.appendChild(newLink)
     if (adresses.includes(item)) {
       sumSanctionAdresses++;
-      document.getElementById("sanctionList").appendChild(newAdress);
+      document.getElementById("sanctionList").appendChild(newListItem);
     } else {
       sumAdresses++;
-      document.getElementById("adressList").appendChild(newAdress);
+      document.getElementById("adressList").appendChild(newListItem);
     }
-  })
+  });
+
   document.getElementById("totalAdresses").textContent = sumAdresses;
   document.getElementById("totalSanctionAdresses").textContent = sumSanctionAdresses;
+
   if (sumSanctionAdresses !== 0) {
     document.getElementById("totalSanctionAdresses").style.color = "red";
   }
@@ -53,8 +64,7 @@ const getVins = async (transID) => {
     }
     const json = await response.json();
     return json.vin;
-  }
-  catch (error) {
+  } catch (error) {
     document.getElementById("error").innerText = error;
     return null;
   }
@@ -72,3 +82,4 @@ const startCheck = () => {
 }
 
 document.getElementById("submit").addEventListener("click", startCheck);
+

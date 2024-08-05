@@ -39,6 +39,7 @@ padding: 2em;
 
 input {
   height: 2em;
+  font-size: 1.2em;
 }
 
 .result-box {
@@ -51,4 +52,15 @@ input {
 
 .adress-box {
   width: 50%;
+}
+
+a {
+  line-height: 1.5em;
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  background-color: white;
+  color: black;
 }
