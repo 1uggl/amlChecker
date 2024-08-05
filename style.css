@@ -1,23 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-	background-color: black;
-	color: white;
+  padding: 0 1em;
+  margin: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
 }
 
-h1 {
-	text-align: center;
+h1, h2 {
+  text-align: center;
 }
 
-div {
-	display: flex;
-	padding: 1em;	
-	width: 80%;
-	border: 1px solid white;
+.input-box {
+  margin: 0;
+  padding: 0 1em 1em 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid white;
 }
+
+label {
+  width: 45%;
+}
+
 #transactionID {
-	width: 50%;
-	margin-right: auto;
+  width: 100%;
+}
+
+
+button {
+padding: 2em;
 }
 
 input {
-	margin: 0 1em;
+  height: 2em;
+}
+
+.result-box {
+  border: 1px solid white;
+  display: flex;
+  width: 100%;
+  padding: 0 1em;
+  justify-content: space-between;
+}
+
+.adress-box {
+  width: 50%;
 }

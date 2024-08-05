@@ -9,18 +9,32 @@
   </head>
   <body>
     <h1>AML Checker</h1>
+    <h2>Check, if your coins touched any listed adresses</h2>
     <div class="input-box">
-      <label for="transactionID">Transaction ID</label>
-      <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
-      <label for="recursion">Backhops</label>
-      <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
-
+      <label for="transactionID">      <h3>Transaction ID</h3>
+        <p>Enter the transactionID of the UTXO you want to check!</p>
+        <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
+      </label>
+      <label for="recursion">
+        <h3>Backhops</h3>
+        <p>How many transactions do you want to look back?</p>
+        <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
+      </label>
       <button id="submit">Prüfen!</button>
     </div>
     <p id="error"></p>
-    <h2>Herkunftsadressen</h2>
-    <ol id="list">
-    </ol>
+    <div class="result-box">
+      <div class="adress-box">
+        <h3>Adresses touched by your coins: <span id="totalAdresses"></span></h3>
+        <ol id="adressList">
+        </ol>
+      </div>
+      <div class="adress-box">
+        <h3>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h3>
+        <ol id="sanctionList">
+        </ol>
+      </div>
+    </div>
     <script src="app.js" type="module"></script> 
   </body>
 </html>
