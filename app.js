@@ -1,4 +1,4 @@
-import { adresses } from "./sanctionLists/ofac.js";
+import { adresses } from "./sanctionLists/sanctionedAddresses.js";
 
 const mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Set();

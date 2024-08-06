@@ -14,6 +14,10 @@ h1, h2 {
   text-align: center;
 }
 
+h2 {
+  margin-top: 0;
+}
+
 .input-box {
   margin: 0;
   padding: 0 1em 1em 1em;
@@ -34,7 +38,7 @@ label {
 
 
 button {
-padding: 2em;
+  padding: 1em;
 }
 
 input {
