@@ -10,13 +10,34 @@
   <body>
     <h1>AML Checker</h1>
     <h2>Check, if your coins touched any listed adresses</h2>
+    <div  id="settings">
+      <h3>Info and Settings</h3>
+      <div id="statusBox">
+        <h4>Statusbar</h4>
+        <p>Started Requests: <span id="startedRequests"></span></p>
+        <p>Finished Requests: <span id="finishedRequests"></span></p>
+      </div>
+      <div id="endpoint-box">
+        <label for="endpoint">
+          <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
+          <p>Which mempool instance should be used to check your transactionID?</p>
+          <input type="text" name="endpoint" id="endpoint">
+          <button id="setEndpoint">Set new Endpoint</button>
+          <button id="resetEndpoint">Reset Endpoint</button>
+        </label>
+      </div>
+      <div id="error-box">
+        <h4>Errorlog</h4>
+        <p id="error">None</p>
+      </div>
+    </div>
     <div class="input-box">
-      <label for="transactionID">      <h3>Transaction ID</h3>
+      <label for="transactionID">      <h4>Transaction ID</h4>
         <p>Enter the transactionID of the UTXO you want to check!</p>
         <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
       </label>
       <label for="recursion">
-        <h3>Backhops</h3>
+        <h4>Backhops</h4>
         <p>How many transactions do you want to look back?</p>
         <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
       </label>
@@ -24,31 +45,14 @@
     </div>
     <div class="result-box">
       <div class="adress-box">
-        <h3>Adresses touched by your coins: <span id="totalAdresses"></span></h3>
+        <h4>Adresses touched by your coins: <span id="totalAdresses"></span></h4>
         <ol id="adressList">
         </ol>
       </div>
       <div class="adress-box">
-        <h3>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h3>
+        <h4>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h4>
         <ol id="sanctionList">
         </ol>
-      </div>
-    </div>
-    <h2>Info and Settings</h2>
-    <div id="error-box">
-      <div>
-        <label for="endpoint">
-          <h3>API-Endpoint</h3>
-          <p>Which mempool instance should be used to check your transactionID?</p>
-          <p>Present Endpoint: <span id="endpointInfo"></span></p>
-          <input type="text" name="endpoint" id="endpoint">
-          <button id="setEndpoint">Set new Endpoint</button>
-          <button id="resetEndpoint">Reset endpoint to mempool.space</button>
-        </label>
-      </div>
-      <div>
-        <h3>Errors:</h3>
-        <p id="error">None</p>
       </div>
     </div>
     <script src="app.js" type="module"></script> 

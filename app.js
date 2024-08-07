@@ -2,13 +2,19 @@ import { adresses } from "./sanctionLists/sanctionedAddresses.js";
 
 let mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Set();
-let maxHops = 5;
+let maxHops;
+let startedRequests = 0;
+let finishedRequests = 0;
 
 const checkTransaction = async (transID, hopsLeft) => {
   try {
     if (hopsLeft > 0) {
+      startedRequests++;
+      document.getElementById("startedRequests").innerText = startedRequests;
       const response = await getVins(transID);
       if (response) {
+        finishedRequests++;
+        document.getElementById("finishedRequests").innerText = finishedRequests;
         for (let vin of response) {
           adressResultSet.add(vin.prevout["scriptpubkey_address"]);
           await checkTransaction(vin.txid, hopsLeft -1);
@@ -69,6 +75,10 @@ const getVins = async (transID) => {
 }
 
 const startCheck = () => {
+  startedRequests = 0;
+  finishedRequests = 0;
+  document.getElementById("startedRequests").innerText = "";
+  document.getElementById("finishedRequests").innerText = "";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
   document.getElementById("error").innerText = "";

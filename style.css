@@ -10,27 +10,41 @@ body {
   color: white;
 }
 
-h1, h2 {
+h1, h2, h3 {
   text-align: center;
 }
 
-h2 {
-  margin-top: 0;
+h3 {
+  width: 100%;
 }
 
 .input-box {
-  margin: 0;
+  flex-wrap: wrap;
+  margin: 1em 0;
   padding: 0 1em 1em 1em;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   width: 100%;
   border: 1px solid white;
 }
 
-#error-box {
+#settings {
+  border: 1px solid white;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+#statusBox, #error-box {
+  width: 25%;
+}
+
+#endpoint {
+  width: 50%;
+}
+#endpoint-box button {
 }
 
 label {
