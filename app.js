@@ -11,10 +11,12 @@ const checkTransaction = async (transID, hopsLeft) => {
     if (hopsLeft > 0) {
       startedRequests++;
       document.getElementById("startedRequests").innerText = startedRequests;
+      document.getElementById("openRequests").innerText = startedRequests - finishedRequests;
       const response = await getVins(transID);
       if (response) {
         finishedRequests++;
         document.getElementById("finishedRequests").innerText = finishedRequests;
+      document.getElementById("openRequests").innerText = startedRequests - finishedRequests;
         for (let vin of response) {
           adressResultSet.add(vin.prevout["scriptpubkey_address"]);
           await checkTransaction(vin.txid, hopsLeft -1);
@@ -79,6 +81,7 @@ const startCheck = () => {
   finishedRequests = 0;
   document.getElementById("startedRequests").innerText = "";
   document.getElementById("finishedRequests").innerText = "";
+  document.getElementById("openRequests").innerText = "";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
   document.getElementById("error").innerText = "";
