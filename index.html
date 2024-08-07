@@ -14,9 +14,9 @@
       <h3>Info and Settings</h3>
       <div id="statusBox">
         <h4>Statusbar</h4>
-        <p>Started Requests: <span id="startedRequests"></span></p>
-        <p>Finished Requests: <span id="finishedRequests"></span></p>
-        <p>Open Requests: <span id="openRequests"></span></p>
+        <p>Started Requests: <span id="startedRequests">0</span></p>
+        <p>Finished Requests: <span id="finishedRequests">0</span></p>
+        <p>Open Requests: <span id="openRequests">0</span></p>
       </div>
       <div id="endpoint-box">
         <label for="endpoint">
@@ -43,6 +43,7 @@
         <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
       </label>
       <button id="submit">Check Transaction</button>
+      <button id="resetList">Reset</button>
     </div>
     <div class="result-box">
       <div class="adress-box">

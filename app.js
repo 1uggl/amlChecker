@@ -10,13 +10,13 @@ const checkTransaction = async (transID, hopsLeft) => {
   try {
     if (hopsLeft > 0) {
       startedRequests++;
-      document.getElementById("startedRequests").innerText = startedRequests;
-      document.getElementById("openRequests").innerText = startedRequests - finishedRequests;
+      document.getElementById("startedRequests").textContent = startedRequests;
+      document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
       const response = await getVins(transID);
       if (response) {
         finishedRequests++;
-        document.getElementById("finishedRequests").innerText = finishedRequests;
-      document.getElementById("openRequests").innerText = startedRequests - finishedRequests;
+        document.getElementById("finishedRequests").textContent = finishedRequests;
+      document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
         for (let vin of response) {
           adressResultSet.add(vin.prevout["scriptpubkey_address"]);
           await checkTransaction(vin.txid, hopsLeft -1);
@@ -26,7 +26,7 @@ const checkTransaction = async (transID, hopsLeft) => {
       updateUI();
     }
   } catch (error) {
-    document.getElementById("error").innerText = error;
+    document.getElementById("error").textContent = error;
   }
 }
 
@@ -71,7 +71,7 @@ const getVins = async (transID) => {
     const json = await response.json();
     return json.vin;
   } catch (error) {
-    document.getElementById("error").innerText = error;
+    document.getElementById("error").textContent = error;
     return null;
   }
 }
@@ -79,12 +79,12 @@ const getVins = async (transID) => {
 const startCheck = () => {
   startedRequests = 0;
   finishedRequests = 0;
-  document.getElementById("startedRequests").innerText = "";
-  document.getElementById("finishedRequests").innerText = "";
-  document.getElementById("openRequests").innerText = "";
+  document.getElementById("startedRequests").textContent = "";
+  document.getElementById("finishedRequests").textContent = "";
+  document.getElementById("openRequests").textContent = "";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
-  document.getElementById("error").innerText = "";
+  document.getElementById("error").textContent = "";
   adressResultSet = new Set();
   let transactionID = document.getElementById("transactionID").value;
   maxHops = parseInt(document.getElementById("recursion").value, 10);
@@ -93,16 +93,26 @@ const startCheck = () => {
 
 const updateEndpoint = () => {
   mempoolApiUrl = document.getElementById("endpoint").value
-  document.getElementById("endpointInfo").innerText = mempoolApiUrl;
+  document.getElementById("endpointInfo").textContent = mempoolApiUrl;
 }
 
 const resetEndpoint = () => {
   mempoolApiUrl = "https://mempool.space/api/tx/";
-  document.getElementById("endpointInfo").innerText = mempoolApiUrl;
+  document.getElementById("endpointInfo").textContent = mempoolApiUrl;
+}
+
+const resetChecker = () => {
+  document.getElementById("startedRequests").textContent = "0";
+  document.getElementById("finishedRequests").textContent = "0";
+  document.getElementById("openRequests").textContent = "0";
+  document.getElementById("totalAdresses").textContent = "";
+  document.getElementById("totalSanctionAdresses").textContent = "";
+  document.getElementById("adressList").innerHTML = "";
+  document.getElementById("sanctionList").innerHTML = "";
 }
 
 document.getElementById("submit").addEventListener("click", startCheck);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
 document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
-document.getElementById("endpointInfo").innerText = mempoolApiUrl;
-
+document.getElementById("resetList").addEventListener("click", resetChecker);
+document.getElementById("endpointInfo").textContent = mempoolApiUrl;
