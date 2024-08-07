@@ -28,6 +28,11 @@ h2 {
   border: 1px solid white;
 }
 
+#error-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 label {
   width: 45%;
 }

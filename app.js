@@ -1,19 +1,17 @@
 import { adresses } from "./sanctionLists/sanctionedAddresses.js";
 
-const mempoolApiUrl = "https://mempool.space/api/tx/";
+let mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Set();
-let rounds = 0;
-let recursive;
+let maxHops = 5;
 
-const checkTransaction = async (transID) => {
+const checkTransaction = async (transID, hopsLeft) => {
   try {
-    if (rounds < recursive) {
-      rounds++;
+    if (hopsLeft > 0) {
       const response = await getVins(transID);
       if (response) {
         for (let vin of response) {
           adressResultSet.add(vin.prevout["scriptpubkey_address"]);
-          await checkTransaction(vin.txid);
+          await checkTransaction(vin.txid, hopsLeft -1);
         }
       }
     } else {
@@ -75,11 +73,23 @@ const startCheck = () => {
   document.getElementById("sanctionList").innerHTML = "";
   document.getElementById("error").innerText = "";
   adressResultSet = new Set();
-  rounds = 0;
   let transactionID = document.getElementById("transactionID").value;
-  recursive = parseInt(document.getElementById("recursion").value, 10);
-  checkTransaction(transactionID);
+  maxHops = parseInt(document.getElementById("recursion").value, 10);
+  checkTransaction(transactionID, maxHops);
+}
+
+const updateEndpoint = () => {
+  mempoolApiUrl = document.getElementById("endpoint").value
+  document.getElementById("endpointInfo").innerText = mempoolApiUrl;
+}
+
+const resetEndpoint = () => {
+  mempoolApiUrl = "https://mempool.space/api/tx/";
+  document.getElementById("endpointInfo").innerText = mempoolApiUrl;
 }
 
 document.getElementById("submit").addEventListener("click", startCheck);
+document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
+document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
+document.getElementById("endpointInfo").innerText = mempoolApiUrl;
 

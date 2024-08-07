@@ -22,7 +22,6 @@
       </label>
       <button id="submit">Check Transaction</button>
     </div>
-    <p id="error"></p>
     <div class="result-box">
       <div class="adress-box">
         <h3>Adresses touched by your coins: <span id="totalAdresses"></span></h3>
@@ -33,6 +32,23 @@
         <h3>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h3>
         <ol id="sanctionList">
         </ol>
+      </div>
+    </div>
+    <h2>Info and Settings</h2>
+    <div id="error-box">
+      <div>
+        <label for="endpoint">
+          <h3>API-Endpoint</h3>
+          <p>Which mempool instance should be used to check your transactionID?</p>
+          <p>Present Endpoint: <span id="endpointInfo"></span></p>
+          <input type="text" name="endpoint" id="endpoint">
+          <button id="setEndpoint">Set new Endpoint</button>
+          <button id="resetEndpoint">Reset endpoint to mempool.space</button>
+        </label>
+      </div>
+      <div>
+        <h3>Errors:</h3>
+        <p id="error">None</p>
       </div>
     </div>
     <script src="app.js" type="module"></script> 
