@@ -18,43 +18,58 @@ h3 {
   width: 100%;
 }
 
-.input-box {
-  flex-wrap: wrap;
+.inputBox {
+  justify-content: space-between;
+  align-items: flex-end;
   margin: 1em 0;
   padding: 0 1em 1em 1em;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   width: 100%;
   border: 1px solid white;
-}
-
-#settings {
-  border: 1px solid white;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  column-gap: 2em;
   flex-wrap: wrap;
 }
 
-#statusBox, #error-box {
-  width: 25%;
+#buttonBox {
+  width: 20em;
+  gap: 1em;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-#endpoint {
-  width: 50%;
-}
-#endpoint-box button {
+.settingsBox {
+  margin: 1em 0;
+  padding: 0 1em 1em 1em;
+  border: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+ align-items: baseline;
+  flex-wrap: wrap;
 }
 
-label {
-  width: 45%;
+#statusBox, #errorBox {
+  width: 15%;
+}
+
+#endpointBox {
+  width: 60%;
+}
+
+.endpointInputBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.endpointInputBox input {
+  width: 70%;
 }
 
 #transactionID {
-  width: 100%;
+  width: 40em;
 }
-
 
 button {
   padding: 1em;
@@ -65,7 +80,7 @@ input {
   font-size: 1.2em;
 }
 
-.result-box {
+.resultBox {
   border: 1px solid white;
   display: flex;
   width: 100%;
@@ -73,7 +88,7 @@ input {
   justify-content: space-between;
 }
 
-.adress-box {
+.adressBox {
   width: 50%;
 }
 

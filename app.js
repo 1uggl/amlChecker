@@ -84,7 +84,7 @@ const startCheck = () => {
   document.getElementById("openRequests").textContent = "";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
-  document.getElementById("error").textContent = "";
+  document.getElementById("error").textContent = "None";
   adressResultSet = new Set();
   let transactionID = document.getElementById("transactionID").value;
   maxHops = parseInt(document.getElementById("recursion").value, 10);
@@ -109,6 +109,8 @@ const resetChecker = () => {
   document.getElementById("totalSanctionAdresses").textContent = "";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
+  document.getElementById("transactionID").value = "";
+  document.getElementById("recursion").value = "5";
 }
 
 document.getElementById("submit").addEventListener("click", startCheck);

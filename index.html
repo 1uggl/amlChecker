@@ -10,7 +10,7 @@
   <body>
     <h1>AML Checker</h1>
     <h2>Check, if your coins touched any listed adresses</h2>
-    <div  id="settings">
+    <div class="settingsBox">
       <h3>Info and Settings</h3>
       <div id="statusBox">
         <h4>Statusbar</h4>
@@ -18,22 +18,26 @@
         <p>Finished Requests: <span id="finishedRequests">0</span></p>
         <p>Open Requests: <span id="openRequests">0</span></p>
       </div>
-      <div id="endpoint-box">
-        <label for="endpoint">
-          <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
-          <p>Which mempool instance should be used to check your transactionID?</p>
-          <input type="text" name="endpoint" id="endpoint">
-          <button id="setEndpoint">Set new Endpoint</button>
-          <button id="resetEndpoint">Reset Endpoint</button>
-        </label>
-      </div>
-      <div id="error-box">
+      <div id="errorBox">
         <h4>Errorlog</h4>
         <p id="error">None</p>
       </div>
+      <div id="endpointBox">
+        <label for="endpoint">
+          <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
+          <p>Which mempool instance should be used to check your transactionID?</p>
+          <div class="endpointInputBox">
+            <input type="text" name="endpoint" id="endpoint">
+            <button id="setEndpoint">Set new Endpoint</button>
+            <button id="resetEndpoint">Reset Endpoint</button>
+          </div>
+        </label>
+      </div>
     </div>
-    <div class="input-box">
-      <label for="transactionID">      <h4>Transaction ID</h4>
+    <div class="inputBox">
+      <h3>Transaction Settings</h3>
+      <label for="transactionID">
+        <h4>Transaction ID</h4>
         <p>Enter the transactionID of the UTXO you want to check!</p>
         <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
       </label>
@@ -42,16 +46,18 @@
         <p>How many transactions do you want to look back?</p>
         <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
       </label>
-      <button id="submit">Check Transaction</button>
-      <button id="resetList">Reset</button>
+      <div id="buttonBox">
+        <button id="submit">Check Transaction</button>
+        <button id="resetList">Reset Lists</button>
+      </div>
     </div>
-    <div class="result-box">
-      <div class="adress-box">
+    <div class="resultBox">
+      <div class="adressBox">
         <h4>Adresses touched by your coins: <span id="totalAdresses"></span></h4>
         <ol id="adressList">
         </ol>
       </div>
-      <div class="adress-box">
+      <div class="adressBox">
         <h4>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h4>
         <ol id="sanctionList">
         </ol>
