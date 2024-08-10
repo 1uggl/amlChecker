@@ -5,6 +5,7 @@ let adressResultSet = new Set();
 let maxHops;
 let startedRequests = 0;
 let finishedRequests = 0;
+let stopRequested = false;
 
 const getList = async () => {
   const response = await fetch(sanctionList);
@@ -14,6 +15,10 @@ const getList = async () => {
 
 const checkTransaction = async (transID, hopsLeft) => {
   try {
+    if (stopRequested) {
+      updateUI();
+      return;
+    }
     if (hopsLeft > 0) {
       startedRequests++;
       document.getElementById("startedRequests").textContent = startedRequests;
@@ -83,6 +88,7 @@ const getVins = async (transID) => {
 }
 
 const startCheck = () => {
+  stopRequested = false;
   startedRequests = 0;
   finishedRequests = 0;
   document.getElementById("startedRequests").textContent = "";
@@ -119,9 +125,14 @@ const resetChecker = () => {
   document.getElementById("recursion").value = "5";
 }
 
+const stopCheck = () => {
+  stopRequested = true;
+}
+
 getList();
 document.getElementById("submit").addEventListener("click", startCheck);
+document.getElementById("stopRequest").addEventListener("click", stopCheck);
+document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
 document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
-document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("endpointInfo").textContent = mempoolApiUrl;
