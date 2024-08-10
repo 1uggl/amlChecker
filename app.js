@@ -1,5 +1,3 @@
-//import { adresses } from "./sanctionLists/sanctionedAddresses.js";
-
 const sanctionList = "https://github.com/0xB10C/ofac-sanctioned-digital-currency-addresses/raw/lists/sanctioned_addresses_XBT.json";
 let adresses = [];
 let mempoolApiUrl = "https://mempool.space/api/tx/";
