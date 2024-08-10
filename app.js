@@ -1,10 +1,18 @@
-import { adresses } from "./sanctionLists/sanctionedAddresses.js";
+//import { adresses } from "./sanctionLists/sanctionedAddresses.js";
 
+const sanctionList = "https://github.com/0xB10C/ofac-sanctioned-digital-currency-addresses/raw/lists/sanctioned_addresses_XBT.json";
+let adresses = [];
 let mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Set();
 let maxHops;
 let startedRequests = 0;
 let finishedRequests = 0;
+
+const getList = async () => {
+  const response = await fetch(sanctionList);
+  const json = await response.json();
+  adresses.push(...json);
+}
 
 const checkTransaction = async (transID, hopsLeft) => {
   try {
@@ -113,6 +121,7 @@ const resetChecker = () => {
   document.getElementById("recursion").value = "5";
 }
 
+getList();
 document.getElementById("submit").addEventListener("click", startCheck);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
 document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
