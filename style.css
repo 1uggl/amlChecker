@@ -20,33 +20,41 @@ h3 {
 
 .inputBox {
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   margin: 1em 0;
-  padding: 0 1em 1em 1em;
   display: flex;
-  width: 100%;
   border: 1px solid white;
-  column-gap: 2em;
   flex-wrap: wrap;
+  width: 100%;
 }
 
-#buttonBox {
+.childBoxInput {
+  width: 40%;
+}
+
+.buttonBox {
   width: 20em;
   gap: 1em;
   display: flex;
-  margin: 0 auto;
   flex-direction: column;
   justify-content: space-around;
 }
 
+.endpointButtons {
+  margin-top: .5em;
+}
+
 .settingsBox {
+  justify-content: space-between;
   margin: 1em 0;
-  padding: 0 1em 1em 1em;
   border: 1px solid white;
   display: flex;
-  justify-content: space-between;
- align-items: baseline;
+  align-items: baseline;
   flex-wrap: wrap;
+}
+
+.childBox {
+  margin: 1em;
 }
 
 #statusBox, #errorBox {
@@ -54,21 +62,15 @@ h3 {
 }
 
 #endpointBox {
-  width: 60%;
+  width: 50%;
 }
 
-.endpointInputBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.endpointInputBox input {
-  width: 70%;
+#endpoint {
+  width: 80%;
 }
 
 #transactionID {
-  width: 40em;
+  width: 100%;
 }
 
 button {
@@ -83,7 +85,6 @@ input {
 .resultBox {
   border: 1px solid white;
   display: flex;
-  width: 100%;
   padding: 0 1em;
   justify-content: space-between;
 }
