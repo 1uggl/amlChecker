@@ -32,7 +32,7 @@
       </div>
     </div>
     <details class="settingsBox">
-      <summary>Info and Settings</summary>
+      <summary>Open Requests, Errorlog and Endpoint Configuration</summary>
       <div class="childBox">
         <h4>Statusbar</h4>
         <p>Started Requests: <span id="startedRequests">0</span></p>
@@ -56,17 +56,20 @@
       </div>
     </details>
     <div class="resultBox">
-      <div class="adressBox">
-        <h4>Adresses touched by your coins: <span id="totalAdresses"></span></h4>
+      <details class="adressBox">
+        <summary>Adresses touched by your coins: <span id="totalAdresses"></span></summary>
         <ol id="adressList">
         </ol>
-      </div>
-      <div class="adressBox">
-        <h4>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h4>
+      </details>
+      <details class="adressBox">
+        <summary>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </summary>
         <ol id="sanctionList">
         </ol>
-      </div>
+      </details>
     </div>
+    <footer>
+      <p>You successfully dodged the FEDs?? Then support our work: bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3</p>
+    </footer>
     <script src="app.js" type="module"></script> 
   </body>
 </html>

@@ -7,7 +7,8 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package-win": "electron-packager . amlchecker --platform=win32 --arch=x64 --out=dist --overwrite",
-    "package-linux": "electron-packager . amlchecker --platform=linux --arch=x64 --out=dist --overwrite"
+    "package-linux": "electron-packager . amlchecker --platform=linux --arch=x64 --out=dist --overwrite",
+    "package-mac": "electron-packager . amlchecker --platform=darwin --arch=x64 --out=dist --overwrite"
   },
   "keywords": [],
   "author": "",

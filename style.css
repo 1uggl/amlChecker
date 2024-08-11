@@ -3,7 +3,6 @@
 }
 
 body {
-  padding: 0 1em;
   margin: 0;
   width: 100%;
   background-color: black;
@@ -16,7 +15,7 @@ h1, h2 {
 
 summary {
   list-style-type: none;
-  margin: .5em .5em;
+  margin: .5em;
   font-size: 1em;
   font-weight: bold;
   cursor: pointer;
@@ -44,11 +43,10 @@ details[open] summary::before {
 .inputBox {
   justify-content: space-between;
   align-items: center;
-  margin: 1em 0;
+  margin: 1em;
   display: flex;
   border: 1px solid white;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .childBoxInput {
@@ -69,7 +67,7 @@ details[open] summary::before {
 
 .settingsBox {
   justify-content: space-between;
-  margin: 1em 0;
+  margin: 1em 1em;
   border: 1px solid white;
   display: flex;
   align-items: baseline;
@@ -106,9 +104,9 @@ input {
 }
 
 .resultBox {
+  margin: 1em;
   border: 1px solid white;
   display: flex;
-  padding: 0 1em;
   justify-content: space-between;
 }
 
@@ -125,4 +123,14 @@ a {
 a:hover {
   background-color: white;
   color: black;
+}
+
+footer {
+  text-align: center;
+  width: 100vw;
+  border-top: 1px solid white;
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  height: 3em;
 }
