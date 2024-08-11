@@ -11,7 +11,7 @@
     <h1>AML Checker</h1>
     <h2>Check, if your coins touched any listed adresses</h2>
     <div class="inputBox">
-      <div class="childBox childBoxInput">
+      <div class="childBox">
         <label for="transactionID">
           <h4>Transaction ID</h4>
           <p>Enter the transactionID of the UTXO you want to check!</p>
@@ -31,44 +31,50 @@
         <button id="resetList">Reset Lists</button>
       </div>
     </div>
-    <details class="settingsBox">
-      <summary>Open Requests, Errorlog and Endpoint Configuration</summary>
-      <div class="childBox">
-        <h4>Statusbar</h4>
-        <p>Started Requests: <span id="startedRequests">0</span></p>
-        <p>Finished Requests: <span id="finishedRequests">0</span></p>
-        <p>Open Requests: <span id="openRequests">0</span></p>
-      </div>
-      <div class="childBox" id="endpointBox">
-        <label for="endpoint">
-          <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
-          <p>Which mempool instance should be used to check your transactionID?</p>
-          <input placeholder="e.g. https://192.69.69.69:6969/api/tx/" type="text" name="endpoint" id="endpoint">
-        </label>
+    <div class="settingsParent">
+      <details class="settingsDetails">
+        <summary>Open Requests, Errorlog and Endpoint Configuration</summary>
+        <div class="settingsBox">
+          <div class="childBox">
+            <h4>Statusbar</h4>
+            <p>Started Requests: <span id="startedRequests">0</span></p>
+            <p>Finished Requests: <span id="finishedRequests">0</span></p>
+            <p>Open Requests: <span id="openRequests">0</span></p>
+          </div>
+          <div class="childBox" id="endpointBox">
+            <label for="endpoint">
+              <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
+              <p>Which mempool instance should be used to check your transactionID?</p>
+              <input placeholder="e.g. https://192.69.69.69:6969/api/tx/" type="text" name="endpoint" id="endpoint">
+            </label>
             <div class="endpointButtons">
               <button id="setEndpoint">Set new Endpoint</button>
               <button id="resetEndpoint">Reset Endpoint</button>
             </div>
-      </div>
-      <div id="errorBox" class="childBox">
-        <h4>Errorlog</h4>
-        <p id="error">None</p>
-      </div>
-    </details>
-    <div class="resultBox">
-      <details class="adressBox">
-        <summary>Adresses touched by your coins: <span id="totalAdresses"></span></summary>
-        <ol id="adressList">
-        </ol>
-      </details>
-      <details class="adressBox">
-        <summary>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </summary>
-        <ol id="sanctionList">
-        </ol>
+          </div>
+          <div id="errorBox" class="childBox">
+            <h4>Errorlog</h4>
+            <p id="error">None</p>
+          </div>
+        </div>
       </details>
     </div>
+    <div class="resultBox">
+      <div class="adressBox">
+        <h4>Adresses touched by your coins: <span id="totalAdresses"></span></h4>
+        <ol id="adressList">
+        </ol>
+      </div>
+      <div class="adressBox">
+        <h4>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h4>
+        <ol id="sanctionList">
+        </ol>
+      </div>
+    </div>
     <footer>
-      <p>You successfully dodged the FEDs?? Then support our work: bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3</p>
+      <p>Si vis pacem para bellum</p>
+      <p id="copyAdress">You successfully dodged the FEDs?? Then support our work: bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3<span class="tooltip">address copied</span></p>
+      <p><a target="_blank" href="https://github.com/1uggl/amlChecker">Github</a></p>
     </footer>
     <script src="app.js" type="module"></script> 
   </body>

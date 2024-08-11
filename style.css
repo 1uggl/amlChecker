@@ -49,10 +49,6 @@ details[open] summary::before {
   flex-wrap: wrap;
 }
 
-.childBoxInput {
-  width: 40%;
-}
-
 .buttonBox {
   width: 20em;
   gap: 1em;
@@ -65,11 +61,16 @@ details[open] summary::before {
   margin-top: .5em;
 }
 
-.settingsBox {
-  justify-content: space-between;
-  margin: 1em 1em;
+.settingsParent {
   border: 1px solid white;
+  margin: 1em;
+
+}
+
+.settingsBox {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
   flex-wrap: wrap;
 }
@@ -87,7 +88,7 @@ details[open] summary::before {
 }
 
 #endpoint {
-  width: 80%;
+  width: 100%;
 }
 
 #transactionID {
@@ -95,7 +96,7 @@ details[open] summary::before {
 }
 
 button {
-  padding: 1em;
+  padding: .5em;
 }
 
 input {
@@ -105,6 +106,8 @@ input {
 
 .resultBox {
   margin: 1em;
+  margin-bottom: 2em;
+  padding: 0 1em;
   border: 1px solid white;
   display: flex;
   justify-content: space-between;
@@ -120,17 +123,60 @@ a {
   color: white;
 }
 
-a:hover {
-  background-color: white;
-  color: black;
-}
-
 footer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   text-align: center;
   width: 100vw;
   border-top: 1px solid white;
   background-color: black;
   position: fixed;
   bottom: 0;
-  height: 3em;
+  height: auto;
+}
+
+footer p {
+  margin: 1em;
+}
+
+#copyAdress {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#copyAdress:hover {
+  color: #e07b00;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position des Tooltips über dem Button */
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Pfeil zeigt nach unten */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+#copyAdress.show-tooltip .tooltip {
+  visibility: visible;
+  opacity: 1;
 }

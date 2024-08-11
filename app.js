@@ -1,12 +1,28 @@
-import { addresses } from "./sanctionLists/sanctionedAddresses.js"
-//const sanctionList = "https://raw.githubusercontent.com/0xB10C/ofac-sanctioned-digital-currency-addresses/main/lists/sanctioned_addresses_XBT.json";
-//let addresses = [];
+import { addresses } from "./sanctionLists/sanctionedAddresses.js";
+
 let mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Set();
 let maxHops;
 let startedRequests = 0;
 let finishedRequests = 0;
 let stopRequested = false;
+
+const copyBitcoinAddress = () => {  
+  const bitcoinAddress = 'bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3';
+  const tempInput = document.createElement('input');
+  document.body.appendChild(tempInput);
+  tempInput.value = bitcoinAddress;
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+
+  const copyAddressElement = document.getElementById("copyAdress");
+  copyAddressElement.classList.add("show-tooltip");
+
+  setTimeout(() => {
+    copyAddressElement.classList.remove("show-tooltip");
+  }, 2000); // Tooltip verschwindet nach 5 Sekunden
+};
 
 const checkTransaction = async (transID, hopsLeft) => {
   try {
@@ -22,7 +38,7 @@ const checkTransaction = async (transID, hopsLeft) => {
       if (response) {
         finishedRequests++;
         document.getElementById("finishedRequests").textContent = finishedRequests;
-      document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
+        document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
         for (let vin of response) {
           adressResultSet.add(vin.prevout["scriptpubkey_address"]);
           await checkTransaction(vin.txid, hopsLeft -1);
@@ -34,7 +50,7 @@ const checkTransaction = async (transID, hopsLeft) => {
   } catch (error) {
     document.getElementById("error").textContent = error;
   }
-}
+};
 
 const updateUI = () => {
   let sumAdresses = 0;
@@ -65,7 +81,7 @@ const updateUI = () => {
   if (sumSanctionAdresses !== 0) {
     document.getElementById("totalSanctionAdresses").style.color = "red";
   }
-}
+};
 
 const getVins = async (transID) => {
   try {
@@ -80,7 +96,7 @@ const getVins = async (transID) => {
     document.getElementById("error").textContent = error;
     return null;
   }
-}
+};
 
 const startCheck = () => {
   stopRequested = false;
@@ -96,18 +112,18 @@ const startCheck = () => {
   let transactionID = document.getElementById("transactionID").value;
   maxHops = parseInt(document.getElementById("recursion").value, 10);
   checkTransaction(transactionID, maxHops);
-}
+};
 
 const updateEndpoint = () => {
-  mempoolApiUrl = document.getElementById("endpoint").value
+  mempoolApiUrl = document.getElementById("endpoint").value;
   document.getElementById("endpointInfo").textContent = mempoolApiUrl;
-}
+};
 
 const resetEndpoint = () => {
   mempoolApiUrl = "https://mempool.space/api/tx/";
   document.getElementById("endpointInfo").textContent = mempoolApiUrl;
   document.getElementById("endpoint").value = "";
-}
+};
 
 const resetChecker = () => {
   document.getElementById("startedRequests").textContent = "0";
@@ -119,15 +135,24 @@ const resetChecker = () => {
   document.getElementById("sanctionList").innerHTML = "";
   document.getElementById("transactionID").value = "";
   document.getElementById("recursion").value = "5";
-}
+};
 
 const stopCheck = () => {
   stopRequested = true;
-}
+};
 
+const adjustMarginBottom = () => {
+  const footerHeight = document.querySelector('footer').offsetHeight + 16;
+  const resultBox = document.querySelector('.resultBox');
+  resultBox.style.marginBottom = `${footerHeight}px`;
+};
+
+window.addEventListener('load', adjustMarginBottom);
+window.addEventListener('resize', adjustMarginBottom);
 document.getElementById("submit").addEventListener("click", startCheck);
 document.getElementById("stopRequest").addEventListener("click", stopCheck);
 document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
 document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
+document.getElementById("copyAdress").addEventListener("click", copyBitcoinAddress);
 document.getElementById("endpointInfo").textContent = mempoolApiUrl;
