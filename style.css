@@ -10,12 +10,35 @@ body {
   color: white;
 }
 
-h1, h2, h3 {
+h1, h2 {
   text-align: center;
 }
 
-h3 {
-  width: 100%;
+summary {
+  list-style-type: none;
+  margin: .5em .5em;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5em;
+  font-size: 1.17em; 
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
 }
 
 .inputBox {

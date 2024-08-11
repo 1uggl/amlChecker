@@ -106,6 +106,7 @@ const updateEndpoint = () => {
 const resetEndpoint = () => {
   mempoolApiUrl = "https://mempool.space/api/tx/";
   document.getElementById("endpointInfo").textContent = mempoolApiUrl;
+  document.getElementById("endpoint").value = "";
 }
 
 const resetChecker = () => {
