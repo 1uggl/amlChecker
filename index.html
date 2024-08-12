@@ -10,12 +10,12 @@
   <body>
     <h1>AML Checker</h1>
     <h2>Check, if your coins touched any listed adresses</h2>
-    <div class="inputBox">
+    <form class="inputBox" id="inputBox">
       <div class="childBox">
         <label for="transactionID">
           <h4>Transaction ID</h4>
           <p>Enter the transactionID of the UTXO you want to check!</p>
-          <input id="transactionID" type="text" name="transactionID" placeholder="transactionID">
+          <input id="transactionID" type="text" name="transactionID" placeholder="transactionID" required pattern="^[a-f0-9]{64}$" title="Enter a valid Bitcoin transaction ID (64 hex characters)">
         </label>
       </div>
       <div class="childBox">
@@ -30,7 +30,7 @@
         <button id="stopRequest">Stop Request</button>
         <button id="resetList">Reset Lists</button>
       </div>
-    </div>
+    </form>
     <div class="settingsParent">
       <details class="settingsDetails">
         <summary>Open Requests, Errorlog and Endpoint Configuration</summary>
@@ -54,25 +54,24 @@
           </div>
           <div id="errorBox" class="childBox">
             <h4>Errorlog</h4>
-            <p id="error">None</p>
+            <ol id="error">
+            </ol>
           </div>
         </div>
       </details>
     </div>
-    <div class="resultBox">
-      <div class="adressBox">
-        <h4>Adresses touched by your coins: <span id="totalAdresses"></span></h4>
-        <ol id="adressList">
-        </ol>
-      </div>
-      <div class="adressBox">
-        <h4>Adresses on sanction lists: <span id="totalSanctionAdresses"></span> </h4>
+      <details class="adressBox">
+        <summary>Adresses on sanction lists:<span id="totalSanctionAdresses"></span> </summary>
         <ol id="sanctionList">
         </ol>
-      </div>
-    </div>
+      </details>
+      <details class="resultBox">
+        <summary>Adresses touched by your coins:<span id="totalAdresses"></span></summary>
+        <ol id="adressList">
+        </ol>
+      </details>
     <footer>
-      <p>Si vis pacem para bellum</p>
+      <p><a target="_blank" href="https://en.wikipedia.org/wiki/Si_vis_pacem,_para_bellum">Si vis pacem para bellum</a></p>
       <p id="copyAdress">You successfully dodged the FEDs?? Then support our work: bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3<span class="tooltip">address copied</span></p>
       <p><a target="_blank" href="https://github.com/1uggl/amlChecker">Github</a></p>
     </footer>

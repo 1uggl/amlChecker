@@ -107,14 +107,30 @@ input {
 .resultBox {
   margin: 1em;
   margin-bottom: 2em;
-  padding: 0 1em;
   border: 1px solid white;
+}
+
+.resultBox summary {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.resultBox span {
+  margin-left: 5px;
 }
 
 .adressBox {
-  width: 50%;
+  margin: 1em;
+  border: 1px solid white;
+}
+
+.adressBox summary {
+  display: flex;
+  align-items: center;
+}
+
+.adressBox span {
+  margin-left: 5px;
 }
 
 a {
@@ -140,12 +156,14 @@ footer p {
   margin: 1em;
 }
 
-#copyAdress {
+footer p,
+footer a {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-#copyAdress:hover {
+footer p:hover,
+footer a:hover {
   color: #e07b00;
 }
 

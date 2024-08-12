@@ -7,6 +7,13 @@ let startedRequests = 0;
 let finishedRequests = 0;
 let stopRequested = false;
 
+const addErrorToList = error => {
+  const errorList = document.getElementById("error")
+  const newListItem = document.createElement("li") 
+  newListItem.textContent = error
+  errorList.appendChild(newListItem)
+}
+
 const copyBitcoinAddress = () => {  
   const bitcoinAddress = 'bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3';
   const tempInput = document.createElement('input');
@@ -40,17 +47,31 @@ const checkTransaction = async (transID, hopsLeft) => {
         document.getElementById("finishedRequests").textContent = finishedRequests;
         document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
         for (let vin of response) {
-          adressResultSet.add(vin.prevout["scriptpubkey_address"]);
+          processVin(vin);
           await checkTransaction(vin.txid, hopsLeft -1);
         }
+        updateUI();
+      }
+      if (!response.vin) {
+        throw new Error("Reached Coinbase")
       }
     } else {
       updateUI();
     }
   } catch (error) {
-    document.getElementById("error").textContent = error;
+    addErrorToList(error)
   }
 };
+const processVin = vin => {
+  let valueToAdd
+  if (!vin.prevout["scriptpubkey_address"]) {
+    const pubKey = vin.prevout.scriptpubkey;
+    valueToAdd = pubKey.slice(2, -2);
+  } else {
+    valueToAdd = vin.prevout["scriptpubkey_address"]
+  }
+  adressResultSet.add(valueToAdd)
+}
 
 const updateUI = () => {
   let sumAdresses = 0;
@@ -93,7 +114,7 @@ const getVins = async (transID) => {
     const json = await response.json();
     return json.vin;
   } catch (error) {
-    document.getElementById("error").textContent = error;
+    addErrorToList(error)
     return null;
   }
 };
@@ -102,12 +123,12 @@ const startCheck = () => {
   stopRequested = false;
   startedRequests = 0;
   finishedRequests = 0;
-  document.getElementById("startedRequests").textContent = "";
-  document.getElementById("finishedRequests").textContent = "";
-  document.getElementById("openRequests").textContent = "";
+  document.getElementById("startedRequests").textContent = "0";
+  document.getElementById("finishedRequests").textContent = "0";
+  document.getElementById("openRequests").textContent = "0";
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
-  document.getElementById("error").textContent = "None";
+  document.getElementById("error").innerHTML = "";
   adressResultSet = new Set();
   let transactionID = document.getElementById("transactionID").value;
   maxHops = parseInt(document.getElementById("recursion").value, 10);
@@ -149,7 +170,10 @@ const adjustMarginBottom = () => {
 
 window.addEventListener('load', adjustMarginBottom);
 window.addEventListener('resize', adjustMarginBottom);
-document.getElementById("submit").addEventListener("click", startCheck);
+document.getElementById("inputBox").addEventListener("submit", (event) => {
+  event.preventDefault();
+  startCheck();
+});
 document.getElementById("stopRequest").addEventListener("click", stopCheck);
 document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
