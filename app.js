@@ -52,9 +52,6 @@ const checkTransaction = async (transID, hopsLeft) => {
         }
         updateUI();
       }
-      if (!response.vin) {
-        throw new Error("Reached Coinbase")
-      }
     } else {
       updateUI();
     }
