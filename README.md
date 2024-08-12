@@ -8,6 +8,6 @@ Clicking the shown adresses will open www.mempool.space to show you the adress, 
 
 ## Download
 
-<a href="https://mega.nz/file/TUQCCRLQ#trjuN5OsI4gT4g8na6SpuFzeixeHCkoChux9CLLCsf8" target="_blank">Download Windows</a><br>
-<a href="https://mega.nz/file/6QI13QQS#Hrke6hDwFg9NHQZBza5UfXrEpuoeNJYzJlCqfdm1iL4" target="_blank">Download MacOS</a><br>
-<a href="https://mega.nz/file/TN4FEKrA#vaaOO7LNR1Da38wf7lYBaASBZH3Qraap5y-_rfoDOyw" target="_blank">Download Linux</a>
+<a href="https://mega.nz/file/eExTnAaB#JHHT4iz7J0ZSHHdK_lWGGjaj8uXdc_1eRrFPmkyn0Bs" target="_blank">Download Windows</a><br>
+<a href="https://mega.nz/file/aF5kETKQ#c9vHvtFsMJczL4AGMaIY4sfsmcgARfbGlS1Ei2Ti3Fg" target="_blank">Download MacOS</a><br>
+<a href="https://mega.nz/file/qRBlRJDL#qPOJEIsSgseKZJtijBKFmOV4ZOFanoQmhgNQneU0wIk" target="_blank">Download Linux</a>
