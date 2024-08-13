@@ -1,7 +1,7 @@
 import { addresses } from "./sanctionLists/sanctionedAddresses.js";
 
 let mempoolApiUrl = "https://mempool.space/api/tx/";
-let adressResultSet = new Set();
+let adressResultSet = new Map();
 let maxHops;
 let startedRequests = 0;
 let finishedRequests = 0;
@@ -47,8 +47,8 @@ const checkTransaction = async (transID, hopsLeft) => {
         document.getElementById("finishedRequests").textContent = finishedRequests;
         document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
         for (let vin of response) {
-          processVin(vin);
-          await checkTransaction(vin.txid, hopsLeft -1);
+          processVin(vin, hopsLeft);
+          await checkTransaction(vin.txid, hopsLeft - 1);
         }
         updateUI();
       }
@@ -59,16 +59,20 @@ const checkTransaction = async (transID, hopsLeft) => {
     addErrorToList(error)
   }
 };
-const processVin = vin => {
-  let valueToAdd
+
+const processVin = (vin, hopsLeft) => {
+  let valueToAdd;
   if (!vin.prevout["scriptpubkey_address"]) {
     const pubKey = vin.prevout.scriptpubkey;
     valueToAdd = pubKey.slice(2, -2);
   } else {
-    valueToAdd = vin.prevout["scriptpubkey_address"]
+    valueToAdd = vin.prevout["scriptpubkey_address"];
   }
-  adressResultSet.add(valueToAdd)
-}
+  const currentHops = maxHops - hopsLeft;
+  if (!adressResultSet.has(valueToAdd) || adressResultSet.get(valueToAdd) > currentHops) {
+    adressResultSet.set(valueToAdd, currentHops + 1);
+  }
+};
 
 const updateUI = () => {
   let sumAdresses = 0;
@@ -77,13 +81,13 @@ const updateUI = () => {
   document.getElementById("sanctionList").innerHTML = ""; 
   document.getElementById("totalSanctionAdresses").style.color = "";
 
-  adressResultSet.forEach(item => {
+  adressResultSet.forEach((hops, item) => {
     let newListItem = document.createElement("li");
     let newLink = document.createElement("a");
     newLink.href = "https://mempool.space/de/address/" + item;
     newLink.target = "_blank";
-    newLink.textContent = item;
-    newListItem.appendChild(newLink)
+    newLink.textContent = `${item} (Hops: ${hops})`;
+    newListItem.appendChild(newLink);
     if (addresses.includes(item)) {
       sumSanctionAdresses++;
       document.getElementById("sanctionList").appendChild(newListItem);
@@ -126,7 +130,7 @@ const startCheck = () => {
   document.getElementById("adressList").innerHTML = "";
   document.getElementById("sanctionList").innerHTML = "";
   document.getElementById("error").innerHTML = "";
-  adressResultSet = new Set();
+  adressResultSet = new Map();
   let transactionID = document.getElementById("transactionID").value;
   maxHops = parseInt(document.getElementById("recursion").value, 10);
   checkTransaction(transactionID, maxHops);
