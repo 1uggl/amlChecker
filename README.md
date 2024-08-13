@@ -10,6 +10,10 @@ Clicking the shown adresses will open www.mempool.space to show you the adress, 
 
 ![Alt text](https://github.com/1uggl/amlChecker/blob/main/images/sample.png)
 
+## Is this scam, will I be rekt?
+
+No, this is not a scam. You will not provide any sensitive data, nor will any data be send to us. The only data send are the transactionIDs to the specified API to get the information for the next hop.
+
 ## Download
 
 <a href="https://mega.nz/file/bAYC2agK#XbIgeAMq_WyRFbKfaovYXhBKT6jUbxQYgQOp3tckbtA" target="_blank">Download Windows</a><br>
