@@ -46,11 +46,19 @@ details[open] summary::before {
 
 .inputBox {
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin: 1em;
   display: flex;
   border: 1px solid white;
   flex-wrap: wrap;
+}
+
+.transactionInputBox {
+  flex: 1.5 0 60%;
+}
+
+.recursionBox {
+  flex: 1 0 15%;
 }
 
 .buttonBox {
@@ -59,6 +67,7 @@ details[open] summary::before {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  flex: 1 0 15%;
 }
 
 .endpointButtons {

@@ -11,17 +11,17 @@
     <h1>AML Checker</h1>
     <h2>Check, if your coins touched any listed adresses</h2>
     <form class="inputBox" id="inputBox">
-      <div class="childBox">
+      <div class="childBox transactionInputBox">
         <label for="transactionID">
           <h4>Transaction ID</h4>
           <p>Enter the transactionID of the UTXO you want to check!</p>
           <input id="transactionID" type="text" name="transactionID" placeholder="transactionID" required pattern="^[a-f0-9]{64}$" title="Enter a valid Bitcoin transaction ID (64 hex characters)">
         </label>
       </div>
-      <div class="childBox">
+      <div class="childBox recursionBox">
         <label for="recursion">
           <h4>Backhops</h4>
-          <p>How many transactions do you want to look back?</p>
+          <p>How far do we look back?</p>
           <input id="recursion" name="recursion" type="number" placeholder="Iterations" value="5" min="1">
         </label>
       </div>
