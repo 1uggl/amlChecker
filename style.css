@@ -13,10 +13,6 @@ h1, h2 {
   text-align: center;
 }
 
-details {
-  padding: 0 1em;
-}
-
 summary {
   list-style-type: none;
   margin: .5em;
@@ -54,20 +50,19 @@ details[open] summary::before {
 }
 
 .transactionInputBox {
-  flex: 1.5 0 60%;
+  flex: 1 1 35em;
 }
 
 .recursionBox {
-  flex: 1 0 15%;
+  flex: 1 1 auto;
 }
 
 .buttonBox {
-  width: 20em;
   gap: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  flex: 1 0 15%;
+  flex: 1 1 20em;
 }
 
 .endpointButtons {
@@ -92,12 +87,17 @@ details[open] summary::before {
   margin: 1em;
 }
 
-#statusBox, #errorBox {
-  width: 15%;
+#statusBox {
+  flex: 1 0 15em;
+}
+#endpointBox {
+  flex: 1 1 37em;
 }
 
-#endpointBox {
-  width: 50%;
+#errorBox {
+  flex: 1 0 20em;
+  max-height: 20em;
+  overflow-y: auto;
 }
 
 #endpoint {

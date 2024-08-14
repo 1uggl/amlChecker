@@ -35,18 +35,18 @@
       <details class="settingsDetails">
         <summary>Open Requests, Errorlog and Endpoint Configuration</summary>
         <div class="settingsBox">
-          <div class="childBox">
+          <div id="statusBox" class="childBox">
             <h4>Statusbar</h4>
             <p>Started Requests: <span id="startedRequests">0</span></p>
             <p>Finished Requests: <span id="finishedRequests">0</span></p>
             <p>Open Requests: <span id="openRequests">0</span></p>
           </div>
           <div class="childBox" id="endpointBox">
-            <label for="endpoint">
-              <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
-              <p>Which mempool instance should be used to check your transactionID?</p>
-              <input placeholder="e.g. https://192.69.69.69:6969" type="text" name="endpoint" id="endpoint">
-            </label>
+              <label for="endpoint">
+                <h4>Present API-Endpoint: <span id="endpointInfo"></span></h4>
+                <p>Which mempool instance should be used to check your transactionID?</p>
+                <input placeholder="e.g. https://192.69.69.69:6969" type="text" name="endpoint" id="endpoint">
+              </label>
             <div class="endpointButtons">
               <button id="setEndpoint">Set new Endpoint</button>
               <button id="resetEndpoint">Reset Endpoint</button>
@@ -60,16 +60,16 @@
         </div>
       </details>
     </div>
-      <details class="adressBox">
-        <summary>Adresses on sanction lists:<span id="totalSanctionAdresses"></span> </summary>
-        <ol id="sanctionList">
-        </ol>
-      </details>
-      <details class="resultBox">
-        <summary>Adresses touched by your coins:<span id="totalAdresses"></span></summary>
-        <ol id="adressList">
-        </ol>
-      </details>
+    <details class="adressBox">
+      <summary>Adresses on sanction lists:<span id="totalSanctionAdresses"></span> </summary>
+      <ol id="sanctionList">
+      </ol>
+    </details>
+    <details class="resultBox">
+      <summary>Adresses touched by your coins:<span id="totalAdresses"></span></summary>
+      <ol id="adressList">
+      </ol>
+    </details>
     <footer>
       <p><a target="_blank" href="https://en.wikipedia.org/wiki/Si_vis_pacem,_para_bellum">Si vis pacem para bellum</a></p>
       <p id="copyAdress">You successfully dodged the FEDs?? Then support our work: bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3<span class="tooltip">address copied</span></p>

@@ -46,6 +46,7 @@ const checkTransaction = async (transID, hopsLeft) => {
       document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
       const response = await getVins(transID);
       if (response) {
+        if (!response[0].is_coinbase) {
         finishedRequests++;
         document.getElementById("finishedRequests").textContent = finishedRequests;
         document.getElementById("openRequests").textContent = startedRequests - finishedRequests;
@@ -53,13 +54,16 @@ const checkTransaction = async (transID, hopsLeft) => {
           processVin(vin, hopsLeft);
           await checkTransaction(vin.txid, hopsLeft - 1);
         }
+        } else {
+          addErrorToList("A request reached the coinbase at " + transID)
+        }
         updateUI();
       }
     } else {
       updateUI();
     }
   } catch (error) {
-    addErrorToList(error)
+    addErrorToList("Caught in checkTransaction " + error)
   }
 };
 
@@ -143,7 +147,7 @@ const getVins = async (transID) => {
     const json = await response.json();
     return json.vin;
   } catch (error) {
-    addErrorToList(error)
+    addErrorToList("Caught in getVins: " + error)
     return null;
   }
 };
