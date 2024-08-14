@@ -1,5 +1,6 @@
 import { addresses } from "./sanctionLists/sanctionedAddresses.js";
 
+
 let mempoolApiUrl = "https://mempool.space/api/tx/";
 let adressResultSet = new Map();
 let maxHops;
@@ -69,8 +70,17 @@ const processVin = (vin, hopsLeft) => {
     valueToAdd = vin.prevout["scriptpubkey_address"];
   }
   const currentHops = maxHops - hopsLeft;
-  if (!adressResultSet.has(valueToAdd) || adressResultSet.get(valueToAdd) > currentHops) {
-    adressResultSet.set(valueToAdd, currentHops + 1);
+
+  if (!adressResultSet.has(valueToAdd)) {
+    adressResultSet.set(valueToAdd, { hops: currentHops + 1, txIds: [vin.txid]});
+  } else {
+    let existingData = adressResultSet.get(valueToAdd)
+    if (existingData.hops > currentHops) {
+      existingData.hops = currentHops +1;
+      existingData.txIds = [vin.txid];
+    } else if (existingData.hops === currentHops + 1) {
+      existingData.txIds.push(vin.txid)
+    }
   }
 };
 
@@ -81,17 +91,33 @@ const updateUI = () => {
   document.getElementById("sanctionList").innerHTML = ""; 
   document.getElementById("totalSanctionAdresses").style.color = "";
 
-  adressResultSet.forEach((hops, item) => {
+  adressResultSet.forEach((data, item) => {
     let newListItem = document.createElement("li");
     let newLink = document.createElement("a");
     newLink.href = "https://mempool.space/de/address/" + item;
     newLink.target = "_blank";
-    newLink.textContent = `${item} (Hops: ${hops})`;
-    newListItem.appendChild(newLink);
+
     if (addresses.includes(item)) {
+      let newBlock = document.createElement("li");
+      newLink.textContent = `${item} (Hops: ${data.hops})`;
+
+      newBlock.appendChild(newLink);
+      newBlock.appendChild(document.createElement("br"));
+
+      data.txIds.forEach(txid => {
+        let linkForTransaction = document.createElement("a");
+        linkForTransaction.href = "https://mempool.space/de/tx/" + txid;
+        linkForTransaction.target = "_blank";
+        linkForTransaction.textContent = `TxID: ${txid}`;
+        newBlock.appendChild(linkForTransaction);
+        newBlock.appendChild(document.createElement("br"));
+      });
+
       sumSanctionAdresses++;
-      document.getElementById("sanctionList").appendChild(newListItem);
+      document.getElementById("sanctionList").appendChild(newBlock);
     } else {
+      newLink.textContent = `${item} (Hops: ${data.hops})`;
+      newListItem.appendChild(newLink);
       sumAdresses++;
       document.getElementById("adressList").appendChild(newListItem);
     }
