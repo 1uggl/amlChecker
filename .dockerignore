@@ -1,0 +1,12 @@
+bestTransactionIdToCheck.txt
+dist/
+.git/
+images/
+LICENSE
+main.js
+node_modules/
+package.json
+package.json.backup
+package-lock.json
+preload.js
+README.md
