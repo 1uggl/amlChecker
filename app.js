@@ -1,7 +1,9 @@
 import { addresses } from "./sanctionLists/sanctionedAddresses.js";
 
-
-let mempoolApiUrl = "https://mempool.space/api/tx/";
+let endPointUrl = "https://mempool.space"
+let endPointForGetTransaction = endPointUrl + "/api/tx/";
+let urlForTransaction = endPointUrl + "/tx/";
+let urlForAdress = endPointUrl + "/address/";
 let adressResultSet = new Map();
 let maxHops;
 let startedRequests = 0;
@@ -29,7 +31,7 @@ const copyBitcoinAddress = () => {
 
   setTimeout(() => {
     copyAddressElement.classList.remove("show-tooltip");
-  }, 2000); // Tooltip verschwindet nach 5 Sekunden
+  }, 2000);
 };
 
 const checkTransaction = async (transID, hopsLeft) => {
@@ -94,7 +96,7 @@ const updateUI = () => {
   adressResultSet.forEach((data, item) => {
     let newListItem = document.createElement("li");
     let newLink = document.createElement("a");
-    newLink.href = "https://mempool.space/de/address/" + item;
+    newLink.href = urlForAdress + item;
     newLink.target = "_blank";
 
     if (addresses.includes(item)) {
@@ -106,7 +108,7 @@ const updateUI = () => {
 
       data.txIds.forEach(txid => {
         let linkForTransaction = document.createElement("a");
-        linkForTransaction.href = "https://mempool.space/de/tx/" + txid;
+        linkForTransaction.href = urlForTransaction + txid;
         linkForTransaction.target = "_blank";
         linkForTransaction.textContent = `TxID: ${txid}`;
         newBlock.appendChild(linkForTransaction);
@@ -133,7 +135,7 @@ const updateUI = () => {
 
 const getVins = async (transID) => {
   try {
-    let url = mempoolApiUrl + transID;
+    let url = endPointForGetTransaction + transID;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error("Response Status: " + response.status);
@@ -163,13 +165,17 @@ const startCheck = () => {
 };
 
 const updateEndpoint = () => {
-  mempoolApiUrl = document.getElementById("endpoint").value;
-  document.getElementById("endpointInfo").textContent = mempoolApiUrl;
+  endPointUrl = document.getElementById("endpoint").value;
+  endPointForGetTransaction = endPointUrl + "/api/tx/";
+  urlForTransaction = endPointUrl + "/tx/";
+  urlForAdress = endPointUrl + "/address/";
+
+  document.getElementById("endpointInfo").textContent = endPointUrl;
 };
 
 const resetEndpoint = () => {
-  mempoolApiUrl = "https://mempool.space/api/tx/";
-  document.getElementById("endpointInfo").textContent = mempoolApiUrl;
+  endPointUrl = "https://mempool.space";
+  document.getElementById("endpointInfo").textContent = endPointUrl;
   document.getElementById("endpoint").value = "";
 };
 
@@ -206,4 +212,4 @@ document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
 document.getElementById("resetEndpoint").addEventListener("click", resetEndpoint);
 document.getElementById("copyAdress").addEventListener("click", copyBitcoinAddress);
-document.getElementById("endpointInfo").textContent = mempoolApiUrl;
+document.getElementById("endpointInfo").textContent = endPointUrl;
