@@ -1,6 +1,15 @@
 import { addresses } from "./sanctionLists/sanctionedAddresses.js";
 
-let endPointUrl = "https://mempool.space"
+const getEndPointUrl = () => {
+  const storedEndPoint = localStorage.getItem("Endpoint");
+  if (storedEndPoint) {
+    return storedEndPoint;
+  } else {
+    return "https://mempool.space";
+  }
+}
+
+let endPointUrl = getEndPointUrl();
 let endPointForGetTransaction = endPointUrl + "/api/tx/";
 let urlForTransaction = endPointUrl + "/tx/";
 let urlForAdress = endPointUrl + "/address/";
@@ -170,15 +179,18 @@ const startCheck = () => {
 
 const updateEndpoint = () => {
   endPointUrl = document.getElementById("endpoint").value;
+  if (endPointUrl) {
+  localStorage.setItem("Endpoint", endPointUrl);
   endPointForGetTransaction = endPointUrl + "/api/tx/";
   urlForTransaction = endPointUrl + "/tx/";
   urlForAdress = endPointUrl + "/address/";
-
   document.getElementById("endpointInfo").textContent = endPointUrl;
+}
 };
 
 const resetEndpoint = () => {
   endPointUrl = "https://mempool.space";
+  localStorage.removeItem("Endpoint")
   document.getElementById("endpointInfo").textContent = endPointUrl;
   document.getElementById("endpoint").value = "";
 };
@@ -205,12 +217,14 @@ const adjustMarginBottom = () => {
   resultBox.style.marginBottom = `${footerHeight}px`;
 };
 
+
 window.addEventListener('load', adjustMarginBottom);
 window.addEventListener('resize', adjustMarginBottom);
 document.getElementById("inputBox").addEventListener("submit", (event) => {
   event.preventDefault();
   startCheck();
 });
+
 document.getElementById("stopRequest").addEventListener("click", stopCheck);
 document.getElementById("resetList").addEventListener("click", resetChecker);
 document.getElementById("setEndpoint").addEventListener("click", updateEndpoint);
