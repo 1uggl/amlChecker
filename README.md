@@ -15,6 +15,6 @@ No, this is not a scam. You will not provide any sensitive data, nor will any da
 
 ## Download
 
-<a href="https://mega.nz/file/qRhgHIST#bmweBd2CNQG__vuf6nkEWxlMS_u0ha02wstzszGWnM0" target="_blank">Download Windows</a><br>
-<a href="https://mega.nz/file/GRpEhTaK#RI7HkVEE5Wle9ql0rZYHXN4HaHOUr1dPSDnPRRbwlKY" target="_blank">Download MacOS</a><br>
-<a href="https://mega.nz/file/jN5klCoT#MjXZHGvGa2tF2ED_w6I8H-X1GWxY3ASO-X1oI3xq6pk" target="_blank">Download Linux</a>
+<a href="https://mega.nz/file/6ABBiBjR#oFALSsE_sQMRs2lq2AagLEXzM6ZsG_FA8SOiOttmPFo" target="_blank">Download Windows</a><br>
+<a href="https://mega.nz/file/ycIwSabC#CoWnag8_yI5IqIcMFGtGjrvLa0zjgOEywyVRAs4YhCU" target="_blank">Download MacOS</a><br>
+<a href="https://mega.nz/file/yIwHwBaA#3fuHbuiwFZkxJCgCECgtikVuDu700OFNaqvusn3cJY0" target="_blank">Download Linux</a>
