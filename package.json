@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^25.0.0",
     "electron-packager": "^17.1.1"
+  },
+  "dependencies": {
+    "@electron/packager": "github:electron/packager",
+    "electron": "^32.0.1"
   }
 }
-
