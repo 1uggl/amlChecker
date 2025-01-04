@@ -27,7 +27,7 @@ const addErrorToList = error => {
 }
 
 const copyBitcoinAddress = () => {  
-  const bitcoinAddress = 'bc1qlxylv26hhrqzngqpax6cnyd3ds6dlrnyr49uw3';
+  const bitcoinAddress = 'angryplay70@walletofsatoshi.com';
   const tempInput = document.createElement('input');
   document.body.appendChild(tempInput);
   tempInput.value = bitcoinAddress;
